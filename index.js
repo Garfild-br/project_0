@@ -11,6 +11,8 @@ const AddHtml = `<div class="wrapper ">
         </div>
     </div>`
 
+
+
 const list = document.querySelector(".list");
 
 function renderBooks(book_list) {
@@ -83,28 +85,40 @@ function init () {
 init()
 
 /*------------окно редактирование---------------*/
-let modal_for_edit = document.querySelector('.modal_for_edit');
-
-let edit_window = document.createElement('div');
-edit_window.className = "box_input";
-edit_window.innerHTML = `<div class='box_input'>
-                                <div class='edit_of_list'>
-                                    <input class='edit_name edit' type='text' id='item_${i}' value="${item.name}">
-                                    <input class='edit_year edit' type='text' id='item_${i}' value="${item.year}">
-
-                                    <textarea class='edit_review' type='text' id='item_${i}' >${item.review}</textarea>
-                                </div>
-                                <div class='close_edit_book'></div>
-                            </div>;`
-
-document.modal_for_edit.append(div);
-
-   
-    
 
 
+const ModalWrapper = document.createElement('div');
 
+const wrapper_for_edit = document.append(ModalWrapper);
 
+ModalWrapper.addEventListener('click', (e)=> {
+    const clickTarget  = e.target;
+
+    ModalWrapper.innerHTML = AddHtml;
+    document.body.append(ModalWrapper);
+
+    if (clickTarget.closest('#add_book')) {
+        const name = ModalWrapper.querySelector('.name_book').value
+        const year = ModalWrapper.querySelector('.year').value
+        const review = ModalWrapper.querySelector('.review').value
+    }
+
+    books.push({name, year, review})
+
+            renderBooks(books)
+
+            ModalWrapper.remove()
+
+            return;
+})
+
+/*---------удаление---------*/
+
+const delete_book = document.querySelector('.delete_book')
+
+delete_book.addEventListener('click', (e) => {
+    console(e.target.closest('.box_input'))
+})
 
 
 
@@ -324,16 +338,29 @@ document.modal_for_edit.append(div);
 
             const a = summ([1,2,3])
             console.log(a) // = 6
+            ___________________________
+            const arr = [1, 2, 3];
+            const a = arr.reduce((accum, current, index, array) => accum + current, 0);
+            console.log(a);
+
+
 
     TODO: 6.2) почитать про  map
             const f = (arr) => {
 
             }
 
-            const a = f([{a: 1} , {a: 2}])
+            const a = f([{b: 1} , {b: 2}])
             console.log(a) /// [1,2]
+            ____________________________
+            const a = [{b: 1} , {b: 2}]
+            const f = a.map((item, index, array) =>  return index; }, 0)
+            console.log(a)
+
 
     TODO: 6.3) почитать про  new Map / new Set в чем разница и плюсы
+
+    В map доступ к значениям осуществляется в помощью ключей, в в set с помощью встроенных методов.
 
     TODO: 7) давай сохранять данные в локал сторадж
  **/
